@@ -28,8 +28,12 @@
 		"npm": "7.10.0"
 	},
 	"dependencies": {
+		"axios": "^0.23.0",
+		"dotenv": "^10.0.0",
 		"ejs": "^3.1.6",
 		"express": "^4.17.1",
-		"morgan": "^1.10.0"
+		"https": "^1.0.0",
+		"morgan": "^1.10.0",
+		"twitter-api-v2": "^1.6.4"
 	}
 }

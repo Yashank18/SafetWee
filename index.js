@@ -1,15 +1,17 @@
+require("dotenv").config();
 const express = require("express"),
 	app = express(),
 	path = __dirname + "/views/",
 	bodyParser = require("body-parser"),
 	morgan = require("morgan"),
-	{spawn} = require("child_process");
+	{spawn} = require("child_process"),
+	getRating = require("./get_rating.js");
 
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(
 	bodyParser.urlencoded({
-		extended: false,
+		extended: false
 	})
 );
 app.use(express.static(__dirname + "/public"));
@@ -18,7 +20,6 @@ app.set("view engine", "ejs");
 app.listen(process.env.PORT || 8000, () => {
 	console.info("App is running on port", process.env.PORT || 8000);
 });
-
 
 /*=============================================>>>>>
 
@@ -32,26 +33,18 @@ app.get("/", (_req, res) => {
 app.get("/download", (_req, res) => {
 	res.redirect("https://github.com/Yashank18/SafetWee/archive/main.zip");
 });
-app.post("/getRating", (req, res) => {
+app.post("/getRating", async (req, res) => {
 	res.header(
 		"Access-Control-Allow-Origin",
 		"*"
 	);
-	let pythonOutput;
-	console.log("Username from extension is",req.body.username)
-	const python = spawn("python3", ["get_rating.py", req.body.username]);
-	python.stdout.on("data", (data) => {
-		pythonOutput = data.toString();
-	});
-	python.on("close", (code) => {
-		console.log(`Python exit code: ${code}`);
-		console.log(pythonOutput);
-		res.send(pythonOutput);
-	});
+	let user_data = await getRating.getAnalysis(req.body.username)
+	console.log(user_data)
+	res.send(user_data);
 });
 
 app.use((_req, res) => {
 	res.status(404).render("error", {
-		errorMessage: "404!",
+		errorMessage: "404!"
 	});
 });
