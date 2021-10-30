@@ -3,7 +3,7 @@ name: "CodeQL"
 on:
   push:
   schedule:
-    - cron: '42 11 * * 3'
+    - cron: '42 9 * * 3'
 
 jobs:
   analyze:
@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'javascript', 'python' ]
+        language: [ 'javascript' ]
     steps:
     - name: Checkout repository
       uses: actions/checkout@main
