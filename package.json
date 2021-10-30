@@ -34,6 +34,7 @@
 		"express": "^4.17.1",
 		"https": "^1.0.0",
 		"morgan": "^1.10.0",
-		"twitter-api-v2": "^1.6.4"
+		"twitter-api-v2": "^1.6.4",
+		"vader-sentiment": "^1.1.3"
 	}
 }
