@@ -16,11 +16,14 @@ chrome.extension.sendMessage({}, function (response) {
 			for (var j = 0; j < abhinav.length; j++) {
 				tweet += abhinav[j]?.innerText;
 			}
-			if(tweet.length !== 0) {
-				// const input = tweet;
-				// const intensity = vader.SentimentIntensityAnalyzer.polarity_scores(input);
-				for (var j = 0; j < abhinav.length; j++) {
-					abhinav[j].style.color="blue";
+			if(i%2) {
+				if(tweet.length !== 0) {
+					// const input = tweet;
+					// const intensity = vader.SentimentIntensityAnalyzer.polarity_scores(input);
+					for (var j = 0; j < abhinav.length; j++) {
+						abhinav[j].style.color="red";
+						abhinav[j].style.textDecoration="line-through";
+					}
 				}
 			}
 		}

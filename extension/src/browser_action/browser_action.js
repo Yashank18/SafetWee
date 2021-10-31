@@ -51,33 +51,38 @@ var clickIt = () => {
 				}
 				var userName = document.createElement("h4");
 				userName.innerText = "@" + username;
-				userName.style.color = "#C6D57E";
+				userName.style.color = "grey";
 
 				var Name = document.createElement("h4");
 				Name.innerText = name;
-				Name.style.color = "#C6D57E";
+				Name.style.color = "black";
 				Name.style.paddingBottom = "0.5rem";
+				Name.style.fontSize = "0.9rem";
 
 				var joined = document.createElement("h5");
 				joined.innerText = "Joined on: " + joinedTwitter;
-				joined.style.color = "#63B4B8";
+				joined.style.color = "rgb(29, 155, 240)";
+				joined.style.fontSize = "0.9rem";
 
 				var Followers = document.createElement("h5");
 				Followers.innerText = "Followers: " + public_metrics.followers_count;
-				Followers.style.color = "#63B4B8";
+				Followers.style.color = "rgb(29, 155, 240)";
+				Followers.style.fontSize = "0.9rem";
 
 				var Following = document.createElement("h5");
 				Following.innerText = "Following: " + public_metrics.following_count;
-				Following.style.color = "#63B4B8";
+				Following.style.color = "rgb(29, 155, 240)";
+				Following.style.fontSize = "0.9rem";
 
 				var Tweet_count = document.createElement("h5");
 				Tweet_count.innerText = "Tweet count: " + public_metrics.tweet_count;
-				Tweet_count.style.color = "#63B4B8";
+				Tweet_count.style.color = "rgb(29, 155, 240)";
 				Tweet_count.style.marginBottom = "1rem";
+				Tweet_count.style.fontSize = "0.9rem";
 
 				var OverallRating = document.createElement("h5");
 				OverallRating.innerText = "Overall Sentiment Score: " + overall_rating;
-				OverallRating.style.color = "#D57E7E";
+				OverallRating.style.color = "black";
 				OverallRating.style.marginTop = "1rem";
 				OverallRating.style.marginBottom = "0.5rem";
 
@@ -133,6 +138,8 @@ var clickIt = () => {
 				unfollow.innerText = "@" + username;
 				unfollow.className = "btn btn-danger";
 				unfollow.id = "unfollow";
+				unfollow.style.borderRadius = "20px";
+				unfollow.style.fontWeight = "600";
 				unfollow.addEventListener("click", function () {
 					window.open("https://twitter.com/" + username, "_blank").focus();
 				});
@@ -182,6 +189,8 @@ var clickIt = () => {
 				let btn = document.createElement("button");
 				btn.innerHTML = usernames[0][check++];
 				btn.classList.add("btn", "btn-outline-primary", "usernameButton");
+				btn.style.borderRadius = "20px";
+				btn.style.fontWeight = "600";
 				div.appendChild(btn);
 			});
 
@@ -202,7 +211,8 @@ var clickIt = () => {
 					bodyDiv.appendChild(loader);
 
 					console.log("Sending", ele.innerText, "to NLP API");
-					fetch("http://20.198.108.109:8000/getRating", {
+					//20.198.108.109
+					fetch("http://localhost:8000/getRating", {
 						method: "post",
 						headers: {
 							"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
