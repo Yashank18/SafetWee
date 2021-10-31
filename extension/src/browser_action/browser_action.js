@@ -212,7 +212,7 @@ var clickIt = () => {
 
 					console.log("Sending", ele.innerText, "to NLP API");
 					//20.198.108.109
-					fetch("http://localhost:8000/getRating", {
+					fetch("http://20.198.108.109:8000/getRating", {
 						method: "post",
 						headers: {
 							"Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
