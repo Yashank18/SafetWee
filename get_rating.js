@@ -66,6 +66,42 @@ function getSentiment (text) {
     });
 }
 
+function getIbmSentiment (text) {
+    return axios.post(process.env.IBM_ENDPOINT + '/v1/analyze?version=2021-08-01', {
+        'text': text,
+        "features": {
+            "entities": {
+              "emotion": true,
+              "sentiment": true,
+              "limit": 2
+            },
+            "keywords": {
+              "emotion": true,
+              "sentiment": true,
+              "limit": 2
+            }
+        },
+    }, {
+        headers: {
+            "Content-Type": "application/json",
+            'Authorization': 'Basic ' + process.env.IBM_64
+        },
+    })
+    .then(function (response) {
+        return response.data
+    })
+    .then(function (data) {
+        return {
+            emotion: data.keywords[0].emotion,
+            sentiment: data.keywords[0].sentiment
+        }
+    })
+    .catch(function (error) {
+        console.log(error);
+        return 'sad'
+    })
+}
+
 async function sentimentAnalysis(tweets) {
     return individual_sentiment = await Promise.all(tweets.map(async (tweet) => {
         var text = removeEmoji(tweet.text);
@@ -139,6 +175,7 @@ async function getAnalysis(username) {
 	};
 }
 // getAnalysis('abhinavsri360')
+// getIbmSentiment('I am so happy today!')
 
 module.exports = {
     getAnalysis: getAnalysis
